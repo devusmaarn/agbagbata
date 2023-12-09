@@ -6,7 +6,6 @@
 
         <title>{{ $title ?? 'Agbagbata' }}</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-         @livewireStyles
     </head>
     <body>
         <x-layouts.navbar layout='app' />
@@ -14,7 +13,5 @@
             {{ $slot }}
         </main>
         <x-layouts.footer />
-
-      @livewireScriptConfig
     </body>
 </html>

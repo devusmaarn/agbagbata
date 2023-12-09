@@ -6,7 +6,6 @@
 
         <title>{{ $title ?? 'Agbagbata' }}</title>
         @vite('resources/css/app.css')
-        @livewireStyles
     </head>
     <body>
         <x-layouts.navbar layout='dashboard' />
@@ -29,8 +28,6 @@
             </div>
         </div>
         <x-layouts.footer />
-
-        @livewireScripts
     </body>
 </html>
 
