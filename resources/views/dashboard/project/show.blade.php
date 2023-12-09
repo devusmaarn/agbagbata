@@ -1,0 +1,97 @@
+<div class="space-y-5">
+
+    <div class="h-96 bg-green-100"></div>
+
+    <h1 class="text-4xl">{{ $project->title }}</h1>
+
+    <p class="text-lg">{{ $project->description }}</p>
+
+    <div role="tablist" class="tabs tabs-lifted">
+        <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Donations" checked />
+        <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+            <div class="overflow-x-auto">
+                <table class="table table-zebra">
+                    <thead>
+                        <tr>
+                            <th>Donor</th>
+                            <th>Donated</th>
+                            <th>Quantity/Amount</th>
+                            <th>Fulfilled</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($donations as $donation)
+                            <tr>
+                                <th>{{ $donation->donor }}</th>
+                                <td class="capitalize">{{$donation->item}}</td>
+                                <td>{{number_format($donation->quantity)}}</td>
+                                <td>
+                                    @if ($donation->fulfilled)
+                                        <div class="badge badge-success badge-outline text-xs">Fulfilled</div>
+                                    @else
+                                        <div class="badge badge-error badge-outline text-xs">Not Fulfilled</div>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="text-xs font-medium link link-primary">Edit</div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+        
+                    @empty($donations)
+                        <tfoot>
+                            <tr><td colspan="6" class="text-center p-5">Oops!  No Donations Yet.</td></tr>
+                        </tfoot>
+                    @endempty
+                </table>
+
+                <form class="mt-10 p-3" wire:submit='add_donation'>
+                    <h4 class="mb-5 font-semibold">New Donation</h4>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+
+                        <x-forms.input name='form.donor' wire:model='form.donor' label='Donor' />
+                        
+                        <label class="form-control w-full max-w-xs">
+                            <div class="label">
+                                <span class="label-text-alt">Item</span>
+                            </div>
+                            <select class="select select-bordered @error('form.item') select-error @enderror" wire:model='form.item'>
+                                <option value="money">Money</option>
+                                <option value="block">Block</option>
+                                <option value="cement">Cement</option>
+                                <option value="sand">Sand</option>
+                            </select>
+                            <div class="label">
+                                <x-forms.error error='form.item' />
+                            </div>
+                        </label>
+
+                        <x-forms.input type='number' name='form.quantity' label='Quantity/Amount' 
+                            wire:model='form.quantity' />
+
+                        <label class="form-control w-full max-w-xs">
+                            <div class="label">
+                                <span class="label-text-alt">Fulfilled</span>
+                            </div>
+                            <select class="select select-bordered @error('form.fulfilled') select-error @enderror" wire:model='form.fulfilled'>
+                                <option value="0" selected>Not Fulfilled</option>
+                                <option value="1">Fulfilled</option>
+                            </select>
+                            <div class="label">
+                                <x-forms.error error='form.fulfilled' />
+                            </div>
+                        </label>
+
+                        <x-forms.button label='Add Promise' />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Promises" />
+        <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 3</div>
+    </div>
+
+</div>

@@ -6,6 +6,7 @@ use App\Livewire\Dashboard\Home;
 use App\Livewire\HomePage;
 use App\Livewire\Dashboard\Project\Create as CreateProject;
 use App\Livewire\Dashboard\Project\Index as AllProjects;
+use App\Livewire\Dashboard\Project\Show as ShowProject;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
             Route::get('/', AllProjects::class)->name('index');
             Route::get('/create', CreateProject::class)->name('create');
+            Route::get('/{project}', ShowProject::class)->name('show');
         });
     });
 

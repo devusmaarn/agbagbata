@@ -1,5 +1,5 @@
-@props(['text' => ''])
+@props(['text' => '', 'href' => '#'])
 
-<a {{ $attributes }} class="btn btn-sm btn-primary" wire:navigate>
-    {{ $slot ?? $text }}
+<a {{ $attributes->merge(['class' => '']) }} href="{{$href}}"  wire:navigate>
+    {{ $text }}
 </a>
