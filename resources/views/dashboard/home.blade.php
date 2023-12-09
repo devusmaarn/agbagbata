@@ -1,3 +1,3 @@
 <div class="">
-    <a href="{{ route('project.create') }}"></a>
+    <a href="{{ route('project.create') }}">Create Project</a>
 </div>
