@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('project_id');
+            $table->foreignId('user_id');
             $table->string('donor');
             $table->string('item');
             $table->boolean('fulfilled');
-            $table->float('quantity')->nullable();
+            $table->string('quantity');
             $table->timestamps();
         });
     }

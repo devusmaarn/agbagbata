@@ -14,19 +14,25 @@ class Show extends Component
     public Project $project;
 
     public $donations = [];
+    public $promises = [];
 
     public DonationForm $form;
 
     public function add_donation(){
         $validated = $this->form->validate();
-        $this->project->donations()->create($validated);
-        $this->donations = $this->project->donations;
+        $this->project->donations()->create([
+            ...$validated,
+            'user_id' => auth()->id()
+        ]);
+        $this->donations = $this->project->donations()->where('fulfilled', true)->get();
+        $this->promises = $this->project->donations()->where('fulfilled', false)->get();
         $this->form->reset();
     }
 
     public function mount(Project $project) {
         $this->project = $project;
-        $this->donations = $project->donations;
+        $this->donations = $project->donations()->where('fulfilled', true)->get();
+        $this->promises = $this->project->donations()->where('fulfilled', false)->get();
     }
 
     public function render()

@@ -29,7 +29,7 @@
                 <span class="material-symbols-outlined">menu</span>
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a>Projects</a></li>
+                <li><a wire:navigate href="{{route('public.projects')}}">Projects</a></li>
                 <li><a>Blogs</a></li>
                 <li><a>Contact</a></li>
             </ul>
